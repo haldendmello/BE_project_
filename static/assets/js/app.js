@@ -1,4 +1,8 @@
 var roiii,creedit_scor,creddit_w,termmm,lloan_type,propp_val,aanual_inc,pp_o_loan,lloan_amm;
+var golbalBorrowerAddress;
+var golbalBorrowerAmmount;
+var golbalLenderAddress;
+var golbalLenderAmount;
 var statuss=1;
 roiii = 12.5
 
@@ -22,6 +26,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var g = document.querySelector('#get_borower');
         if (g) { g.addEventListener('click', () => getBorrower()); }
 
+
+        var payBorrower = document.querySelector('#payToBorrower');
+        if (payBorrower) { payBorrower.addEventListener('click', () => sendMoneyToBorrower()); }
+
+        
+        var payEMI = document.querySelector('#payEMItoLender');
+        if (payEMI) { payEMI.addEventListener('click', () => sendMoneyToLender()); }
 
         
 
@@ -374,7 +385,6 @@ function getUserType(walletAddress)
                 AgentContract.methods.get_borrower(walletAddress).call(acc, { gas: 1000000 }, function (error, results) {
                     if (!error) 
                     {
-                        console.log(results);
                         document.getElementById("annualIncomePro").value = results[2];
                         document.getElementById("noOfDependentsPro").value = results[3];
                         document.getElementById("phoneNoPro").value = results[4];
@@ -384,6 +394,7 @@ function getUserType(walletAddress)
 
             if( document.URL == 'http://127.0.0.1:8000/userPayment' )
             {
+                var receivedAmount = 0;
                 console.log("user proflie");
                 fetch('/getKYCDetails', {
                     method: 'POST',
@@ -396,13 +407,32 @@ function getUserType(walletAddress)
 
                     AgentContract.methods.get_borrower(walletAddress).call(acc, { gas: 1000000 }, function (error, results) {
                         if (!error) {
-
                             AgentContract.methods.get_loann(results[8][0]).call(acc, { gas: 1000000 }, function (error, loanInfo) {
                                 if (!error) {
-                                    console.log(loanInfo);
-                                    document.getElementById("LoanAmount").value = loanInfo[3];                                    
+                                    document.getElementById("LoanAmount").value = loanInfo[3];
+                                    document.getElementById("amountReceived").value = results[5];                                   
                                     document.getElementById("RateOfInterest").value = loanInfo[2];
                                     document.getElementById("termDays").value = loanInfo[4];
+
+                                    receivedAmount = results[5];
+                                    var loanAmount = loanInfo[3];
+                                    var interestRate = loanInfo[2];
+                                    var loanTenure = 12;
+                                    
+                                    let r = parseFloat(interestRate)/12/100;
+                                    let P = loanAmount;
+                                    let n = loanTenure;
+
+                                    let EMI = (P*r* Math.pow((1+r),n)) / (Math.pow((1+r),n)-1);
+                                    let totalInterest =(EMI * n) - P;
+                                    let totalPayment  = totalInterest + parseFloat(P);
+
+                                    golbalLenderAddress = loanInfo[5][0];
+                                    golbalLenderAmount = Math.round(EMI);
+
+                                    document.getElementById("totalPayment").value = Math.round(totalPayment);
+                                    document.getElementById("totalInterest").value = Math.round(totalInterest);
+                                    document.getElementById("monthlyPayment").value = Math.round(EMI);
                                 }
                             })
                         }
@@ -414,8 +444,13 @@ function getUserType(walletAddress)
                 .catch(error => {
                     console.error('Error:', error);
                 });
+
+
+                if( receivedAmount == 0 )
+                {
+                    document.getElementById("payEMItoLender").style.display = "none";
+                }
             }
-            
         }
         else
         {
@@ -442,7 +477,6 @@ function getUserType(walletAddress)
                     var getBorrowerPayUrl = document.URL.split('/');
                     if( getBorrowerPayUrl[3] == 'lenderPay' )
                     {
-                        console.log("user proflie lender side");
                         fetch('/getKYCAadhar', {
                             method: 'POST',
                             body: JSON.stringify({
@@ -457,19 +491,31 @@ function getUserType(walletAddress)
                             document.getElementById("panNumberProLen").value = data.PANnumber;
                             document.getElementById("aadharNumberProLen").value = data.AadharNumber;
                             document.getElementById("walletAddressProLen").value = data.WalletAddress;
+                            golbalBorrowerAddress = data.WalletAddress;
 
                             AgentContract.methods.get_borrower(data.WalletAddress).call(acc, { gas: 1000000 }, function (error, results) {
                                 if (!error) {
-                                    
                                     AgentContract.methods.get_loann(results[8][0]).call(acc, { gas: 1000000 }, function (error, loanInfo) {
                                         if (!error) {
-                                            console.log(loanInfo);
+                                            // console.log(loanInfo);
                                             document.getElementById("loanAppliedProLen").value = loanInfo[3];
                                             document.getElementById("annualIcomeProLen").value = results[2];
                                             document.getElementById("noOfDependentsProLen").value = results[3];
                                             document.getElementById("phoneNoProLen").value = results[4];
                                             document.getElementById("rateOfInterestProLen").value = loanInfo[2];
                                             document.getElementById("loanTermProLen").value = loanInfo[4];
+                                            golbalBorrowerAmmount = loanInfo[3];
+
+                                            if( results[5].length == 1 )
+                                            {
+                                                document.getElementById("loanStatus").value = "Not Paid";
+                                            }
+                                            else
+                                            {
+                                                document.getElementById("payToBorrower").style.display = "none";
+                                                document.getElementById("loanStatus").value = "Paid";
+                                            }
+                                            
                                         }
                                     })
                                 }
@@ -513,6 +559,35 @@ function getUserType(walletAddress)
     //     }
     // })
 }
+
+function sendMoneyToBorrower()
+{
+    console.log("sendMoneyToBorrower");
+
+    AgentContract.methods.sendmoneyy(golbalBorrowerAddress, golbalBorrowerAmmount).send({value:golbalBorrowerAmmount, from: acc }).on("confirmation", function (cnfno, receipt) {
+        console.log("sending money : " + cnfno); 
+        console.log("receipt : " + receipt);
+    }).on('receipt', function (receipt) {
+        // receipt example
+        console.log(receipt);
+    });
+}
+
+function sendMoneyToLender()
+{
+    console.log("sendMoneyToLender");
+
+    golbalLenderAddress = "0xa6fB17d8262b5C2248D105873884954F92222b97";
+
+    AgentContract.methods.sendmoneyy(golbalLenderAddress, golbalLenderAmount).send({value:golbalBorrowerAmmount, from: acc }).on("confirmation", function (cnfno, receipt) {
+        console.log("sending money : " + cnfno); 
+        console.log("receipt : " + receipt);
+    }).on('receipt', function (receipt) {
+        // receipt example
+        console.log(receipt);
+    });
+}
+
 
 function getAppliedLoans()
 {
