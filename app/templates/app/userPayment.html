@@ -1,0 +1,65 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+{% block script %}
+{% endblock %}
+
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"> </script>
+    <!-- <script ></script> -->
+    <main>
+        <div class="apply-area pt-150 pb-150">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="apply-wrapper">
+                            <!-- Form -->
+                            <form action="" method="">
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>First Name</label>
+                                            <input type="text" id="firstNamePay" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Last Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Last Name</label>
+                                            <input type="text" id="lastNamePay" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Loan Applied -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Loan Amount Pending</label>
+                                            <input type="text" id="LoanAmount" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Credit Score -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Rate of Interest</label>
+                                            <input type="text" id="RateOfInterest" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Term -->
+                                    <div class="col-lg-12">
+                                        <div class="single-form">
+                                            <label>Term Days</label>
+                                            <input type="text" id="termDays" value="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Register -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- From Area End -->
+    </main>
+</body>
+{% endblock %}

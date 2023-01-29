@@ -1,0 +1,24 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+{% block script %}
+<script src="{% static './assets/js/getBorrower.js' %}"></script>
+{% endblock %}
+
+<main>
+    <!-- <script>{ get_borower() }</script> -->
+    <!-- Hero Start-->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>Loan Rejected</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+{% endblock %}

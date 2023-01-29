@@ -1,0 +1,49 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+{% block script %}
+<!-- <script src="{% static './assets/js/AppliedLoan.js' %}"></script> -->
+{% endblock %}
+
+<main>
+    <!-- <script>{ get_borower() }</script> -->
+    <!-- Hero Start-->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>Applied Loan</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="apply-area pt-150 pb-150">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="apply-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Credit Score</th>
+                                    <th scope="col">Rate of Interest</th>
+                                    <th scope="col">Loan Amount</th>
+                                    <th scope="col">View Profile</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appliedLoanLists">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
