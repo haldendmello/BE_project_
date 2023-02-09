@@ -5,16 +5,15 @@
 <script src="{% static './assets/js/getBorrower.js' %}"></script>
 {% endblock %}
 
-{{ roi|json_script:"roi" }}
-{{ status|json_script:"status" }}
-{{ p_o_loan|json_script:"p_o_loan" }}
-{{ a_income|json_script:"a_income" }}
-{{ credit_score|json_script:"credit_score" }}
-{{ property_value|json_script:"property_value" }}
-{{ term|json_script:"term" }}
-{{ loan_type|json_script:"loan_type" }}
-{{ credit_worthiness|json_script:"credit_worthiness" }}
+
 {{ loan_a|json_script:"loan_a" }}
+{{ p_o_loan|json_script:"p_o_loan" }}
+{{ term|json_script:"term" }}
+{{ roi|json_script:"roi" }}
+{{ credit_score|json_script:"credit_score" }}
+{{ credit_worthiness|json_script:"credit_worthiness" }}
+{{ property_value|json_script:"property_value" }}
+{{ loan_type|json_script:"loan_type" }}
 
 
 
@@ -33,27 +32,17 @@
         </div>
     </div>
 
-    <div class="apply-area pt-150 pb-150">
+    <div class="apply-area pt-60 pb-60">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="apply-wrapper">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Loan Amount</th>
-                                    <th scope="col">Months</th>
-                                    <th scope="col">Rate of Interest</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="borrowerLists">
-
-                            </tbody>
-                        </table>
+                        <div class="alert alert-success" role="alert">
+                            Loan is approved with {{roi}} % interest rate. Click on Apply to proceed!
+                        </div>
                     </div>
                 </div>
+                <input class="btn apply-btn mt-30" id="apply_l" type="submit" value="Apply">
             </div>
         </div>
     </div>

@@ -30,10 +30,8 @@
                     <div class="col-lg-8">
                         <div class="apply-wrapper">
                             <!-- Form -->
-                            <!-- <form action="{% url 'applyLoan' %}" method="POST"> -->
-                            <form>
-                                <!-- {% csrf_token %} -->
-                                <!-- {% csrf_token %} -->
+                            <form action="{% url 'applyLoan' %}" method="POST">
+                                {% csrf_token %}
                                 <div class="row">
                                     <!-- First Name -->
                                     <div class="col-lg-6">
@@ -137,10 +135,9 @@
                                     </div> -->
                                 </div>
                                 <!-- Register -->
-                                <input class="btn apply-btn mt-30" id="apply_l" type="button" value="Register">
+                                <input class="btn apply-btn mt-30" type="submit" value="Register">
                             </form>
 
-                            <!-- <input class="btn apply-btn mt-30" id="apply_l" type="submit" value="Register"> -->
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 import pickle,gzip
-import numpy as np
+# import numpy as np
 
 @unauthenticated_user
 def register(request, usertype):
@@ -108,14 +108,14 @@ def applyLoanFrom(request):
         gender = request.POST["gender"]
         status = request.POST["status"]
         buss_comm = request.POST["buss_comm"]
-        a_income = request.POST["a_income"]
-        # rate_of_interest = request.POST["rate_of_interest"]
         age = request.POST["age"]
-        credit_score = request.POST["credit_score"]
         property_value = request.POST["property_value"]
         term = request.POST["term"]
-        # loan_type = request.POST["loan_type"]
-        # credit_worthiness = request.POST["credit_worthiness"]
+        # credit_score = request.POST["credit_score"]
+        credit_worthiness = 1
+
+        # a_income = request.POST["a_income"]
+
         # print(loan_a, p_o_loan, gender, status, buss_comm, a_income, age, credit_score, property_value, term, loan_type, credit_worthiness)
 
         # if(p_o_loan == ):
@@ -129,30 +129,29 @@ def applyLoanFrom(request):
         print("Status : ",status)
         if(status == 1):
             # roi = load_roi(float(gender),p_o_loan,credit_worthiness,loan_a,term,a_income,credit_score,age,status)
-            roi = 12.5
+            roi = 12
             # print("ppppp",float(gender),p_o_loan,credit_worthiness,loan_a,term,a_income,credit_score,age,status)
             # roi = 12
             context = {
                 'status' : 1,
                 'loan_a':loan_a,
                 'p_o_loan' :p_o_loan,
-                'a_income':a_income,
-                'credit_score' : credit_score,
-                'property_value':property_value,
                 'term':term,
-                'roi' : float(roi)
+                'credit_worthiness' : credit_worthiness,
+                'roi' :float(roi)
             }
-            return render(request, "app/index.html", context)
+            return render(request, "app/loanStatus.html", context)
         else:
             return render(request, "app/loanrejected.html")
     else:
         return render(request, "app/apply.html")
 
-# loan applied
 
+# loan applied
 def appledLoanList(request):
 
     return render(request, "app/appliedLoanList.html")
+
 
 def loanStatus(request):
 
@@ -181,22 +180,31 @@ def lenderPay(request, aadhar):
     return  render(request, "app/lenderPay.html")
 
 
+def lenderDashboard(request):
+
+    return render(request, "app/dashboard.html")
+
+
 # Pending orders for lenders
 # @login_required(login_url="login")
 # @allowed_users(allowed_rolls=["lender"])
 def borrowerList(request):
+
     return render(request, "app/borrowerList.html")
 
 
 def about(request):
+
     return render(request, "app/about.html")
 
 
 def services(request):
+
     return render(request, "app/services.html")
 
 
 def contact(request):
+
     return render(request, "app/contact.html")
 
 
@@ -230,6 +238,8 @@ def storeKYC(request):
     if request.method == 'POST' :
         userData = json.loads(request.body)
         user = kyc.objects.filter(AadharNumber = userData['aadharNo']).values()
+
+        print(user)
 
         if user :
             userAddInfo = kyc.objects.get(id = user[0]['id'])

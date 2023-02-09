@@ -24,4 +24,5 @@ urlpatterns = [
     path("getKYCDetails", views.getKYCDetails, name="getKYCDetails"),
     path("getKYCAadhar", views.getKYCAadhar, name="getKYCAadhar"),
     path("lenderPay/<str:aadhar>", views.lenderPay, name="lenderPay"),
+    path("dashboard", views.lenderDashboard, name="dashboard"),
 ]
