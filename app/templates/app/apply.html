@@ -1,0 +1,172 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"> </script>
+    <!-- <script ></script> -->
+    <main>
+        <!-- {{ usertype| json_script:"usertype" }} -->
+        <!-- Hero Start-->
+        <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center pt-50">
+                            <h2>Apply Loan</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- {% if message %}
+        <div>{{ message }}</div>
+        {% endif %} -->
+        <!--Hero End -->
+        <!-- Form Area Start -->
+        <div class="apply-area pt-150 pb-150">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="apply-wrapper">
+                            <!-- Form -->
+                            <form action="{% url 'applyLoan' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* LOAN AMOUNT ($)</label>
+                                            <input type="number" id="loanAmount" name="loan_a" placeholder="Enter Amount"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <!-- Last Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* PURPOSE OF LOAN </label>
+                                            <div class="select-option mb-10">
+                                                <select name="p_o_loan" id="purposeLoan">
+                                                    <option value="">Choose Categories</option>
+                                                    <option value="0">Resturant</option>
+                                                    <option value="1">Clothing</option>
+                                                    <option value="2">Equipment</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* GENDER</label>
+                                            <div class="select-option mb-10">
+                                                <select name="gender" id="gender">
+                                                    <option value="">Choose GENDER</option>
+                                                    <option value="0">Female</option>
+                                                    <option value="1">Male</option>
+                                                    <option value="2">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </br>
+                                    </div>
+                                    <!-- Password-1 -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* MARRIED STATUS</label>
+                                            <div class="select-option mb-10">
+                                                <select name="status" id="marriedStatus">
+                                                    <option value="">MARRIED STATUS</option>
+                                                    <option value="0">Married</option>
+                                                    <option value="1">Un Married</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </br>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* BUSINESS / COMMERCIAL</label>
+                                            <div class="select-option mb-10">
+                                                <select name="buss_comm" id="business_commercial">
+                                                    <option value="">Business / Commercial</option>
+                                                    <option value="0">Business</option>
+                                                    <option value="1">Commercial</option>
+                                                </select>
+                                            </div>
+                                        </div></br>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* AGE</label>
+                                            <input type="number" id="age" name="age" placeholder="Enter Age"
+                                            required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* PROPERTY VALUE</label>
+                                            <input type="number" id="propertyValue" name="property_value" placeholder="Enter Property Value"
+                                            required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* TERM</label>
+                                            <input type="number" id="term" name="term" placeholder="Enter Term"
+                                            required>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* LOAN TYPE</label>
+                                            <input type="number" id="loan_type" name="loan_type" placeholder="Enter Loan Type"
+                                            required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>* CREDIT WORTHINESS</label>
+                                            <input type="number" id="credit_worthiness" name="credit_worthiness" placeholder="Enter Credit Worthiness"
+                                            required>
+                                        </div>
+                                    </div>
+                                    </div> -->
+                                </div>
+                                <!-- Register -->
+                                <input class="btn apply-btn mt-30" type="submit" value="Register">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- From Area End -->
+    </main>
+    <!-- <script src="./static/assets/js/app.js" type="text/javascript"></script> -->
+
+    <!-- </body> -->
+    <!-- <script>
+        console.log("in script")
+        var name = $('#first_name').val() + " " + $('#last_name').val();
+        console.log(name);
+        var aadhar = $('#aadhar').val();
+        console.log(aadhar);
+        name = "ppraveen";
+        aadhar = "123123123132432"
+        function add_user() {
+            AgentContract.methods.user(name, 1, aadhar).send({ from: acc }).on("confirmation", function (cnfno, receipt) {
+                console.log("cnf : " + cnfno); console.log("receipt : " + receipt);
+            }).on('receipt', function (receipt) {
+                // receipt example
+                console.log(receipt);
+
+            })
+        }
+
+
+    </script> -->
+</body>
+{% endblock %}

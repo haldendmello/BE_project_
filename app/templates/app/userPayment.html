@@ -1,0 +1,97 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"> </script>
+    <!-- <script ></script> -->
+    <main>
+        <div class="apply-area pt-150 pb-150">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="apply-wrapper">
+                            <!-- Form -->
+                            <form action="" method="">
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>First Name</label>
+                                            <input type="text" id="firstNamePay" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Last Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Last Name</label>
+                                            <input type="text" id="lastNamePay" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Loan Applied -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Loan Amount</label>
+                                            <input type="text" id="LoanAmount" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Loan Applied -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Amount Received</label>
+                                            <input type="text" id="amountReceived" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Credit Score -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Rate of Interest</label>
+                                            <input type="text" id="RateOfInterest" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Term -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Months</label>
+                                            <input type="text" id="termDays" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Total Payment -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Total Payment</label>
+                                            <input type="text" id="totalPayment" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Total Interest -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Total Interest</label>
+                                            <input type="text" id="totalInterest" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Monthly payment -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Monthly Payment</label>
+                                            <input type="text" id="monthlyPayment" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Pay button -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <input class="btn apply-btn mt-30" id="payEMItoLender" type="button" value="Pay EMI">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Register -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- From Area End -->
+    </main>
+</body>
+{% endblock %}

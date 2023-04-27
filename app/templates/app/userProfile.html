@@ -1,0 +1,91 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"> </script>
+    <!-- <script ></script> -->
+    <main>
+        <div class="apply-area pt-150 pb-150">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="apply-wrapper">
+                            <!-- Form -->
+                            <form action="" method="">
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>First Name</label>
+                                            <input type="text" id="firstNamePro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Last Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Last Name</label>
+                                            <input type="text" id="lastNamePro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Credit Score -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Credit Score</label>
+                                            <input type="text" id="creditScorePro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- PAN Number -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>PAN Number</label>
+                                            <input type="text" id="panNumberPro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Aadhar Number -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Aadhar Number</label>
+                                            <input type="text" id="aadharNumberPro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Annual Inocme -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>ANNUAL INCOME</label>
+                                            <input type="text" id="annualIncomePro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- No of dependents -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>NO OF DEPENDENTS</label>
+                                            <input type="text" id=noOfDependentsPro value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Phone Number -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Phone Number</label>
+                                            <input type="text" id="phoneNoPro" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Wallet Address -->
+                                    <div class="col-lg-12">
+                                        <div class="single-form">
+                                            <label>Wallet Address</label>
+                                            <input type="text" id="walletAddressPro" value="" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Register -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- From Area End -->
+    </main>
+</body>
+{% endblock %}

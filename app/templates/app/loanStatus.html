@@ -1,0 +1,50 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+{% block script %}
+<script src="{% static './assets/js/getBorrower.js' %}"></script>
+{% endblock %}
+
+
+{{ loan_a|json_script:"loan_a" }}
+{{ p_o_loan|json_script:"p_o_loan" }}
+{{ term|json_script:"term" }}
+{{ roi|json_script:"roi" }}
+{{ credit_score|json_script:"credit_score" }}
+{{ credit_worthiness|json_script:"credit_worthiness" }}
+{{ property_value|json_script:"property_value" }}
+{{ loan_type|json_script:"loan_type" }}
+
+
+
+<main>
+    <!-- <script>{ get_borower() }</script> -->
+    <!-- Hero Start-->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>Status</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="apply-area pt-60 pb-60">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="apply-wrapper">
+                        <div class="alert alert-success" role="alert">
+                            Loan is approved with {{roi}} % interest rate. Click on Apply to proceed!
+                        </div>
+                    </div>
+                </div>
+                <input class="btn apply-btn mt-30" id="apply_l" type="submit" value="Apply">
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

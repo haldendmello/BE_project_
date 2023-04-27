@@ -1,0 +1,127 @@
+{% extends "app/layout.html" %}
+{% load static %}
+{% block body %}
+
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"> </script>
+    <!-- <script ></script> -->
+    <main>
+        <div class="apply-area pt-150 pb-150">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="apply-wrapper">
+                            <!-- Form -->
+                            <form action="" method="">
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>First Name</label>
+                                            <input type="text" id="firstNameProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Last Name -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Last Name</label>
+                                            <input type="text" id="lastNameProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Credit Score -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Credit Score</label>
+                                            <input type="text" id="creditScoreProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Loan Applied -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Loan Amount Requested</label>
+                                            <input type="text" id="loanAppliedProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- PAN Number -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>PAN Number</label>
+                                            <input type="text" id="panNumberProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Aadhar Number -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Aadhar Number</label>
+                                            <input type="text" id="aadharNumberProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Annual Inocme -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>ANNUAL INCOME</label>
+                                            <input type="text" id="annualIcomeProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- No of dependents -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>NO OF DEPENDENTS</label>
+                                            <input type="text" id="noOfDependentsProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Rate of Interest -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Rate of Interest</label>
+                                            <input type="text" id="rateOfInterestProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Phone Number -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Phone Number</label>
+                                            <input type="text" id="phoneNoProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Loan Term -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Loan Term</label>
+                                            <input type="text" id="loanTermProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Loan Status -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <label>Loan Status</label>
+                                            <input type="text" id="loanStatus" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Wallet Address -->
+                                    <div class="col-lg-12">
+                                        <div class="single-form">
+                                            <label>Wallet Address</label>
+                                            <input type="text" id="walletAddressProLen" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <!-- Pay button -->
+                                    <div class="col-lg-6">
+                                        <div class="single-form">
+                                            <input class="btn apply-btn mt-30" id="payToBorrower" type="button" value="Pay to Borrower">
+                                        </div>
+                                    </div>
+                                    
+
+                                </div>
+                                <!-- Register -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- From Area End -->
+    </main>
+</body>
+{% endblock %}
