@@ -115,7 +115,7 @@ def applyLoanFrom(request):
         # credit_score = request.POST["credit_score"]
         credit_worthiness = 1
 
-        # a_income = request.POST["a_income"]
+        a_income = request.POST["a_income"]
 
         # print(loan_a, p_o_loan, gender, status, buss_comm, a_income, age, credit_score, property_value, term, loan_type, credit_worthiness)
 
@@ -129,7 +129,7 @@ def applyLoanFrom(request):
         status = 1
         print("Status : ",status)
         if(status == 1):
-            # roi = load_roi(float(gender),p_o_loan,credit_worthiness,loan_a,term,a_income,credit_score,age,status)
+            roi = load_roi(float(gender),p_o_loan,credit_worthiness,loan_a,term,a_income,credit_score,age,status)
             roi = 12
             # print("ppppp",float(gender),p_o_loan,credit_worthiness,loan_a,term,a_income,credit_score,age,status)
             # roi = 12

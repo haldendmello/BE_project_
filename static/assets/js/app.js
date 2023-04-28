@@ -287,7 +287,8 @@ function apply_loan()
 
 function applyLoanSmartContract()
 {
-    AgentContract.methods.approved_loan_ids(lloan_amm, pp_o_loan, term, roiii, creedit_scor, creddit_w).send({ from: acc }).on("confirmation", function (cnfno, receipt) {
+    var roiiString = roiii.toString();
+    AgentContract.methods.approved_loan_ids(lloan_amm, pp_o_loan, term, roiiString, creedit_scor, creddit_w).send({ from: acc }).on("confirmation", function (cnfno, receipt) {
         console.log("loannn : " + cnfno); 
         console.log("loann receipt : " + receipt);
     }).on('receipt', function (receipt) {
@@ -429,7 +430,8 @@ function getUserType(walletAddress)
                                     document.getElementById("termDays").value = loanInfo[4];
 
                                     receivedAmount = results[5];
-                                    var interestRate = loanInfo[2];
+                                    // var interestRate = loanInfo[2];
+                                    var interestRate = 12;    // change this is hard coded interest rate
                                     var loanTenure = 12;
                                     
                                     let r = parseFloat(interestRate)/12/100;
@@ -486,11 +488,11 @@ function getUserType(walletAddress)
                     document.getElementById("appliedLoanNavLink").style.display = "inline-block";
                     document.getElementById("dashboardNavLink").style.display = "inline-block";
 
-                    var getDashboard = document.URL.split('/');
-                    if( getDashboard[3] == 'dashboard' )
-                    {
-                        makeDashboar();
-                    }
+                    // var getDashboard = document.URL.split('/');
+                    // if( getDashboard[3] == 'dashboard' )
+                    // {
+                    //     makeDashboar();
+                    // }
                     
                     var getBorrowerPayUrl = document.URL.split('/');
                     if( getBorrowerPayUrl[3] == 'lenderPay' )
@@ -554,6 +556,10 @@ function getUserType(walletAddress)
                     {
                         getBorrower();
                     }
+                    else if(document.URL == 'http://127.0.0.1:8000/dashboard')
+                    {
+                        makeDashboar(walletAddress);
+                    }
                 }
                 else
                 {
@@ -581,22 +587,55 @@ function getUserType(walletAddress)
 
 
 // Make Dashboard
-function makeDashboar()
+function makeDashboar(walletAddress)
 {
     console.log("Dashboard");
+
+    AgentContract.methods.get_lender(walletAddress).call(acc, { gas: 1000000 }, function (error, results) {
+        if (!error) {
+            console.log(results);
+            document.getElementById("lenderName").innerHTML = results[0];
+            document.getElementById("lednerEmail").innerHTML = results[1];
+
+            results[6].forEach(borrowerAddress => {
+                console.log(borrowerAddress);
+                
+                AgentContract.methods.get_borrower(borrowerAddress).call(acc, { gas: 1000000 }, function (error, borrowerData) {
+                    if (!error) {
+                        console.log(borrowerData)
+                        const b_List = document.createElement('tr');
+                        if (b_List)
+                        {
+                            b_List.innerHTML = `
+                                <th scope="row">#</th>
+                                <td>${borrowerData[0]}</td>
+                                <td>${borrowerData[5]}</td>
+                                <td>0</td>
+                                <td bgcolor="black">
+                                    <a href="http://127.0.0.1:8000/lenderPay/${results[1]}">
+                                        View Profile
+                                    </a>
+                                </td>
+                            `;
+                            var ss = document.querySelector('#dashBoard');
+                            if (ss) { ss.append(b_List); }
+                        }
+                    }
+                })
+
+
+            });
+
+        }
+    })
+
 }
 
 
 
 function sendMoneyToBorrower()
 {
-    // console.log("sendMoneyToBorrower->", "Address", golbalLenderAddress);
-
-    console.log("Borrower addresssssss -> ",golbalBorrowerAddress);
-    console.log("Loan ID ->", golbalLoanID);
     var amount = parseInt(golbalBorrowerAmmount);
-    console.log("amount -> ",typeof(amount));
-
     AgentContract.methods.sendmoneyy(golbalBorrowerAddress, golbalLoanID).send({value:amount, from: acc, gas: 1000000 }).on("confirmation", function (cnfno, receipt) {
         console.log("sending money : " + cnfno); 
         console.log("receipt : " + receipt);
@@ -610,7 +649,7 @@ function sendMoneyToLender()
 {
     console.log("sendMoneyToLender");
     var amount = parseInt(golbalLenderAmount);
-
+    
     AgentContract.methods.sendmoneyy(golbalLenderAddress, golbalLoanID).send({value: amount, from: acc, gas: 1000000 }).on("confirmation", function (cnfno, receipt) {
         console.log("sending money : " + cnfno); 
         console.log("receipt : " + receipt);
