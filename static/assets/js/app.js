@@ -515,7 +515,7 @@ function getUserType(walletAddress)
                                 if (!error) {
                                     AgentContract.methods.get_loann(results[8][0]).call(acc, { gas: 1000000 }, function (error, loanInfo) {
                                         if (!error) {
-                                            // console.log(loanInfo);
+                                            console.log(loanInfo);
                                             document.getElementById("loanAppliedProLen").value = loanInfo[3];
                                             document.getElementById("annualIcomeProLen").value = results[2];
                                             document.getElementById("noOfDependentsProLen").value = results[3];
@@ -523,6 +523,7 @@ function getUserType(walletAddress)
                                             document.getElementById("rateOfInterestProLen").value = loanInfo[2];
                                             document.getElementById("loanTermProLen").value = loanInfo[4];
                                             golbalBorrowerAmmount = loanInfo[3];
+                                            golbalLoanID = loanInfo[0];
 
                                             if( results[5].length == 1 )
                                             {
@@ -589,9 +590,10 @@ function makeDashboar()
 
 function sendMoneyToBorrower()
 {
-    console.log("sendMoneyToBorrower->", "Address", golbalLenderAddress);
+    // console.log("sendMoneyToBorrower->", "Address", golbalLenderAddress);
 
-    // console.log("addresssssss -> ",typeof(golbalBorrowerAddress));
+    console.log("Borrower addresssssss -> ",golbalBorrowerAddress);
+    console.log("Loan ID ->", golbalLoanID);
     var amount = parseInt(golbalBorrowerAmmount);
     console.log("amount -> ",typeof(amount));
 
