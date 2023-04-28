@@ -288,6 +288,7 @@ function apply_loan()
 function applyLoanSmartContract()
 {
     var roiiString = roiii.toString();
+
     AgentContract.methods.approved_loan_ids(lloan_amm, pp_o_loan, term, roiiString, creedit_scor, creddit_w).send({ from: acc }).on("confirmation", function (cnfno, receipt) {
         console.log("loannn : " + cnfno); 
         console.log("loann receipt : " + receipt);
@@ -430,7 +431,7 @@ function getUserType(walletAddress)
                                     document.getElementById("termDays").value = loanInfo[4];
 
                                     receivedAmount = results[5];
-                                    // var interestRate = loanInfo[2];
+                                    var interestRate = loanInfo[2];
                                     var interestRate = 12;    // change this is hard coded interest rate
                                     var loanTenure = 12;
                                     
@@ -649,7 +650,7 @@ function sendMoneyToLender()
 {
     console.log("sendMoneyToLender");
     var amount = parseInt(golbalLenderAmount);
-    
+
     AgentContract.methods.sendmoneyy(golbalLenderAddress, golbalLoanID).send({value: amount, from: acc, gas: 1000000 }).on("confirmation", function (cnfno, receipt) {
         console.log("sending money : " + cnfno); 
         console.log("receipt : " + receipt);
